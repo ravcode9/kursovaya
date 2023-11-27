@@ -28,3 +28,19 @@ def format_operation(operation):
     currency = operation['operationAmount']['currency'].get('name', '')
     result = f"{date_str} {operation.get('description', '')}\n{masked_card_number} -> {masked_account_number}\n{operation.get('operationAmount', {}).get('amount', '')} {operation.get('operationAmount', {}).get('currency', {}).get('name', '')}\n"
     return result
+
+
+def display_last_operations(operations):
+    if not operations:
+        print("Операции не найдены.")
+        return
+
+    last_operations = sorted(operations, key=lambda x: x.get('date', '').split('T')[0], reverse=True)[:5]
+    formatted_operations = [format_operation(operation) for operation in last_operations]
+    result = "\n\n".join(formatted_operations)
+    print(result)
+
+if __name__ == "__main__":
+    file_path = "C:/Users/ralatypov/Downloads/operations.json"
+    operations = read_operations_from_json(file_path)
+    display_last_operations(operations)
