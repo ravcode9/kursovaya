@@ -87,3 +87,20 @@ def test_format_operation_missing_keys():
     expected_result = "Недействительная операция"
     result = format_operation(invalid_operation)
     assert result == expected_result
+
+
+def test_display_last_operations_no_operations(capfd):
+    # Тестируем функцию display_last_operations без операций
+    display_last_operations([])
+    captured = capfd.readouterr()
+    assert captured.out.strip() == "Операции не найдены."
+
+def test_display_last_operations_less_than_5_operations(capfd):
+    # Тестируем функцию display_last_operations с менее чем 5 операциями
+    operations = [
+        {'date': '2023-11-27T12:34:56.789', 'description': 'Тестовая операция1', 'from': '1234567890123456',
+         'to': '9876543210123456', 'operationAmount': {'amount': '100', 'currency': {'name': 'USD'}}},
+    ]
+    display_last_operations(operations)
+    captured = capfd.readouterr()
+    assert "27.11.2023 Тестовая операция1" in captured.out
