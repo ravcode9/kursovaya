@@ -48,3 +48,19 @@ def test_display_last_operations(temp_json_file, capfd):
     captured = capfd.readouterr()
     expected_output = "27.11.2023 Тестовая операция1\n1234 XX** **** 3456 -> **3456\n100 USD\n\n\n26.11.2023 Тестовая операция2\n9876 XX** **** 3456 -> **3456\n50 EUR\n"
     assert captured.out.strip() == expected_output.strip()
+
+
+def test_format_invalid_operation():
+    # Тестируем функцию format_operation на недействительной операции
+    invalid_operation = {}
+    expected_result = "Недействительная операция"
+    result = format_operation(invalid_operation)
+    assert result == expected_result
+
+
+def test_format_operation_invalid_data():
+    # Тестируем функцию format_operation на недействительных данных
+    invalid_operation = {'date': '2023-11-27T12:34:56.789'}
+    expected_result = "Недействительная операция"
+    result = format_operation(invalid_operation)
+    assert result == expected_result
