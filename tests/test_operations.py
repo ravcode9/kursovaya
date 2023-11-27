@@ -64,3 +64,26 @@ def test_format_operation_invalid_data():
     expected_result = "Недействительная операция"
     result = format_operation(invalid_operation)
     assert result == expected_result
+
+
+def test_read_operations_from_json_empty_file(tmp_path):
+    # Создаем пустой временный файл
+    file_path = tmp_path / 'empty_operations.json'
+    with open(file_path, 'w', encoding='utf-8') as file:
+        file.write('')
+
+    result = read_operations_from_json(file_path)
+    assert result == []
+
+
+def test_format_operation_missing_keys():
+    # Тестируем функцию format_operation на операции с отсутствующими ключами
+    invalid_operation = {'date': '2023-11-27T12:34:56.789'}
+    expected_result = "Недействительная операция"
+    result = format_operation(invalid_operation)
+    assert result == expected_result
+
+    invalid_operation = {'description': 'Тестовая операция'}
+    expected_result = "Недействительная операция"
+    result = format_operation(invalid_operation)
+    assert result == expected_result
