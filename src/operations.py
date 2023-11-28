@@ -1,5 +1,6 @@
 import json
 from datetime import datetime
+import os
 
 
 def read_operations_from_json(file_path):
@@ -12,7 +13,8 @@ def read_operations_from_json(file_path):
 
 
 if __name__ == "__main__":
-    file_path = "C:/Users/ralatypov/Downloads/operations.json"
+    # Используем относительный путь для файла JSON
+    file_path = os.path.join(os.path.dirname(__file__), "..", "operations.json")
     operations = read_operations_from_json(file_path)
 
 
@@ -41,6 +43,7 @@ def display_last_operations(operations):
     print(result)
 
 if __name__ == "__main__":
-    file_path = "C:/Users/ralatypov/Downloads/operations.json"
+    # Используем относительный путь для файла JSON
+    file_path = os.path.join(os.path.dirname(__file__), "..", "operations.json")
     operations = read_operations_from_json(file_path)
     display_last_operations(operations)
