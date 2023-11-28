@@ -28,7 +28,11 @@ def format_operation(operation):
 
     amount = operation['operationAmount'].get('amount', '')
     currency = operation['operationAmount']['currency'].get('name', '')
-    result = f"{date_str} {operation.get('description', '')}\n{masked_card_number} -> {masked_account_number}\n{operation.get('operationAmount', {}).get('amount', '')} {operation.get('operationAmount', {}).get('currency', {}).get('name', '')}\n"
+    result = (
+        f"{date_str} {operation.get('description', '')}\n"
+        f"{masked_card_number} -> {masked_account_number}\n"
+        f"{operation.get('operationAmount', {}).get('amount', '')} {operation.get('operationAmount', {}).get('currency', {}).get('name', '')}\n"
+    )
     return result
 
 
